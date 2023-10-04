@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="functioncontainer.js"></script> -->
+    <script>
+        function togglePopUp() {
+                const floatingcont = document.getElementById('floatcont');
+                floatingcont.classList.toggle('showing');
+                const floatingtkt = document.getElementById('floatticket');
+                floatingtkt.classList.toggle('showing');
+            }
+            function toggleConfirmation() {
+                const floatingcont = document.getElementById('confirmcont');
+                floatingcont.classList.toggle('showing');
+                const floatingtkt = document.getElementById('floatconfirm');
+                floatingtkt.classList.toggle('showing');
+            }
+        
+
+        function insidehtml(ctimage, ctmonth, ctlocation, ctdate, ctdesc, ctid, ctprice) {
+            const floatingimage = document.getElementById('floatingticketimage');
+            const floatinglocation = document.getElementById('floatingticketlocation');
+            const floatingdate = document.getElementById('floatingticketdate');
+            const floatingheading = document.getElementById('floatingticketheading');
+            const floatingdesc = document.getElementById('floatingticketdesc');
+            const floatingprice = document.getElementById('floatingticketprice');
+            const floatingemail = document.getElementById('floatingticketemail');
+            const floatingnooftickets = document.getElementById('noOfTickets');
+            const floatingtotalprice = document.getElementById('floatingtickettotalprice');
+            const floatingbookbtn = document.getElementById('flaotingbooknowbtn');
+            const floatingconfirmemail = document.getElementById('finalconfirmemail');
+
+            floatingimage.innerHTML = `<img src="${ctimage}" alt="">`;
+            floatinglocation.innerHTML = ctlocation;
+            floatingdate.innerHTML = ctdate;
+            floatingheading.innerHTML = `This ${ctmonth} we are coming to ${ctlocation}.`;
+            floatingdesc.innerHTML = ctdesc;
+            floatingprice.innerHTML = `Rs. ${ctprice}`;
+            floatingtotalprice.innerHTML = `Rs. ${ctprice}.00`;
+            floatingnooftickets.addEventListener("change", () => {
+                var updatedprice = Number(ctprice) * floatingnooftickets.value;
+                floatingtotalprice.innerHTML = `Rs. ${updatedprice}.00`;
+            });
+            const useremailforbooking = floatingemail.value;
+
+            floatingbookbtn.addEventListener('click', () => {
+                console.log('function did run');
+                floatingconfirmemail.innerHTML = floatingemail.value;
+                floatingemail.value = "";
+                floatingnooftickets.value = '1';
+                togglePopUp();
+                toggleConfirmation();
+            });
+            
+            togglePopUp();
+        }
+
+        function bookticketfinal(useremailforbooking) {
+                togglePopUp();
+                alert('this ' + useremailforbooking);
+            }
+    </script>
+</head>
+<body>
+
+    <header>
+
+        <input type="checkbox" id="menu-bar">
+        <label for="menu-bar" id="hamburgericon"><i class="fa-solid fa-bars fa-2x"></i></label>
+        
+
+        <nav class="nav">
+            <ul>
+                <li><a href="#home">home</a></li>
+                <li><a href="#band">band</a></li>
+                <li><a href="#tour">tour</a></li>
+                <li><a href="#contact">contact</a></li>
+                <li><a href="#more">more +</a>
+                    <ul>
+                        <li><a href="#merchandise">Merchandise</a></li>
+                        <li><a href="#extras">Extras</a></li>
+                        <li><a href="#medias">Media</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <i id="nav-search-button" class="fa-solid fa-magnifying-glass fa-xl"></i>
+    </header>
+
+    <div class="floatingcontainer" id="floatcont">
+        <div class="floatingpopup" id="floatticket">
+            <div class="floatingticketcontainer">
+                <div class="floatingimageandname">
+                    <div id="floatingticketimage">
+                    <img src="/images/india.jpg" alt="">
+                    </div>
+                    <h1 id="floatingticketlocation">Delhi, India</h4>
+                    <h2 id="floatingticketdate">20 October 2023</h2>
+                </div>
+                <div class="floatingdetailsandbooking">
+                    <h1 id="floatingticketheading">This October we are coming to Delhi, India.</h1>
+                    <p id="floatingticketdesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo 
+                        modi tenetur enim minus itaque, consequuntur facilis labore vero 
+                        impedit voluptatibus iste dolores dolorem. Dicta odio 
+                        optio corporis doloribus nemo nihil?</p>
+                    <h4>Ticket Price: <span id="floatingticketprice">Rs. 4,999.00</span></h4>
+                    <input id="floatingticketemail" type="email" placeholder="Enter your email">
+                    <div class="floatingnumberoftickets">
+                        <div>
+                            <label for="noOfTickets">Number of Tickets:</label>
+                            <select name="noOfTickets" id="noOfTickets">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                        <h3>Total amount: <span id="floatingtickettotalprice">Rs. 4,999.00</span></h3>
+                    </div>
+                    <div class="floatingbookingbtncontainer">
+                        <button id="flaotingbooknowbtn">Book Now</button>
+                        <button id="floatingcancelbookbtn" onclick="togglePopUp()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="floatingconfirmationcontainer" id="confirmcont">
+        <div class="floatingconfirmation" id="floatconfirm">
+            <h1>Thank you for considering</h1>
+            <h2>Your ticket details and final payment link will be sent to</h2>
+            <h3 id="finalconfirmemail">useremailaddress</h3>
+            <h4>We will see you in the concert</h4>
+            <button onclick="toggleConfirmation()">OK</button>
+        </div>
+    </div>
+
+    <section id="home">
+        <div class="homediv">
+            <div class="homedivtext">
+                <strong>Los Angeles</strong>
+                <p>We had the best time playing at Venice Beach</p>
+            </div>
+        </div>
+    </section>
+    <section id="band">
+        <div class="banddiv">
+            <div class="banddivtext">
+                <strong>The Band</strong>
+                <h4>We Love Music</h4>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga quae accusantium
+                    commodi repellat at, inventore id voluptas perspiciatis veritatis vel, reiciendis
+                    fugit rem cupiditate magni ad. Numquam est tempora dolorem?
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga quae accusantium
+                    commodi repellat at, inventore id voluptas perspiciatis veritatis vel, reiciendis
+                    fugit rem cupiditate magni ad. Numquam est tempora dolorem?
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga quae accusantium
+                    commodi repellat at, inventore id voluptas perspiciatis veritatis vel, reiciendis
+                    fugit rem cupiditate magni ad. Numquam est tempora dolorem?
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga quae accusantium
+                    commodi repellat at, inventore id voluptas perspiciatis veritatis vel, reiciendis
+                    fugit rem cupiditate magni ad. Numquam est tempora dolorem?</p>
+            </div>
+            <div class="banddivmembers">
+                <div class="membercard">
+                    <strong>Name</strong>
+                    <div class="memberimage"  style="background-image: url(images/guitarist.jpg);"></div>
+                </div>
+                <div class="membercard">
+                    <strong>Name</strong>
+                    <div class="memberimage" style="background-image: url(images/guitarist.jpg);"></div>
+                </div>
+                <div class="membercard">
+                    <strong>Name</strong>
+                    <div class="memberimage"  style="background-image: url(images/guitarist.jpg);"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="tour">
+        <div class="tourdiv">
+            <div class="tourheadingdiv">
+            <strong>TOUR DATES</strong>
+            </div>
+            <h4>Remember to book you tickets</h4>
+            <div class="bookingmonths" id="concertmonthlyspawner">
+            </div>
+            <div class="bookingtickets" id="concertticketspawner">   
+            </div>
+        </div>
+    </section>
+    <section id="merchandise">
+        <div class="tourdiv">
+            <div class="tourheadingdiv">
+                <strong>MERCHANDISE</strong>
+            </div>
+            <h4>Get our latest merch</h4>
+            <div class="bookingtickets" id="merchspawner">
+            </div>
+        </div>
+    </section>
+    <section id="extras">
+
+    </section>
+
+    <section id="media">
+
+    </section>
+    <section id="contact">
+        <div class="contactdiv">
+            <div class="contactheading">
+                <strong>contact</strong>
+            </div>
+            <h4>Fan? Drop a note!</h4>
+            <div class="contactdetailsdiv">
+                <div class="contactdetails">
+                    <div class="contactlocation">
+                        <i class="fa-solid fa-location-dot fa-2xs"></i>
+                        <strong>Chicago, US</strong>
+                    </div>
+                    <div class="contactphone">
+                        <i class="fa-solid fa-phone fa-2xs"></i>
+                        <strong>Phone: +00 151515</strong>
+                    </div>
+                    <div class="contactemail">
+                        <i class="fa-solid fa-envelope fa-2xs"></i>
+                        <strong>Email: mail@mail.com</strong>
+                    </div>
+                </div>
+                <div class="usermessage">
+                    <div class="userdetails">
+                        <input id="username" type="text" placeholder="Name">
+                        <input id="useremail" type="email" placeholder="Email">
+                    </div>
+                    <input id="usermessagetext" type="text" placeholder="Message">
+                    <button id="usermessagesubmit" class="usersendbutton">SEND</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr>
+    <footer>
+        <div class="externallinks">
+            <div class="socialmediadiv">
+                <i class="fa-brands fa-square-facebook fa-2x"></i>
+                <i class="fa-brands fa-instagram fa-2x"></i>
+                <i class="fa-brands fa-square-snapchat fa-2x"></i>
+                <i class="fa-brands fa-pinterest fa-2x"></i>
+                <i class="fa-brands fa-square-x-twitter fa-2x"></i>
+                <i class="fa-brands fa-linkedin-in fa-2x"></i>
+            </div>
+            <p>Made by <a href="">Himanshu</a></p>
+        </div>
+    </footer>
+
+    <script src="concerts.js" type="module"></script>
+    <script src="storedmessages.js" type="module"></script>
+    <script src="script.js" type="module"></script>
+    <script>
+        
+    </script>
+    <!-- <div onload="test()" style="display: none;"></div> -->
+</body>
+</html>

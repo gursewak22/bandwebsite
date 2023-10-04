@@ -1,0 +1,926 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gabarito', cursive;
+    scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar{
+    display: none;
+}
+
+/* testing */
+
+/* .nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #11141a;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    padding: 20px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+} */
+
+.floatingcontainer{
+    visibility: hidden;
+    z-index: 90;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    /* filter: blur(20px); */
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.floatingconfirmationcontainer{
+    visibility: hidden;
+    z-index: 90;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    /* filter: blur(20px); */
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.floatingcontainer.showing {
+    visibility: visible;
+}
+
+.floatingconfirmationcontainer.showing{
+    visibility: visible;
+}
+
+.floatingpopup{
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    /* height: 80%; */
+    max-width: 1200px;
+    padding: 20px;
+    background: white;
+    z-index: 100;
+    border-radius: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.floatingconfirmation{
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    /* height: 80%; */
+    max-width: 1200px;
+    padding: 20px;
+    background: white;
+    z-index: 100;
+    border-radius: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.floatingpopup.showing {
+    top: 50%;
+    visibility: visible;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.floatingconfirmation.showing{
+    top: 50%;
+    visibility: visible;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.floatingticketcontainer{
+    border: 2px solid gray;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+}
+
+.floatingimageandname{
+    display: block;
+    padding: 20px;
+}
+
+.floatingimageandname img{
+    width: 500px;
+    border-radius: 20px;
+    border: 2px solid gray;
+}
+
+.floatingimageandname h1{
+    font-size: 60px;
+}
+
+.floatingimageandname h2{
+    font-size: 40px;
+    color: gray;
+}
+
+.floatingdetailsandbooking{
+    padding: 20px;
+    display: block;
+}
+
+.floatingdetailsandbooking p{
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.floatingdetailsandbooking h4{
+    font-size: 25px;
+}
+
+.floatingdetailsandbooking h4 span{
+    color: red;
+}
+
+.floatingdetailsandbooking input{
+    width: 100%;
+    height: 60px;
+    margin: 20px 0;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.floatingnumberoftickets{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.floatingnumberoftickets label{
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.floatingnumberoftickets select{
+    font-size: 20px;
+}
+
+.floatingnumberoftickets h3{
+    font-size: 20px
+}
+
+.floatingnumberoftickets h3 span{
+    color: red;
+}
+
+.floatingbookingbtncontainer{
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.floatingbookingbtncontainer button{
+    height: 60px;
+    width: 49%;
+    font-size: 20px;
+    background: #11141a;
+    color: white;
+}
+
+.floatingbookingbtncontainer button:hover{
+    background: #323946;
+    transform: scale(1.03);
+}
+
+.nav{
+    transition: 0.5s;
+}
+
+.nav ul {
+    list-style: none;
+}
+
+.nav ul li {
+    position: relative;
+    float: left;
+}
+
+.nav ul li a {
+    padding: 20px;
+    display: block;
+}
+
+.nav ul li a:hover {
+    color: rgb(255, 82, 82);
+}
+
+.nav ul li ul {
+    position: absolute;
+    left: 0;
+    width: 200px;
+    background: gray;
+    display: none;
+}
+
+.nav ul li ul li {
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav ul li:focus-within>ul,
+.nav ul li:hover>ul {
+    display: initial;
+}
+
+.active{
+    color: rgb(255, 82, 82);
+}
+
+
+
+/* testing */
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* padding: 20px; */
+    background: #11141a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+#nav-search-button{
+    color: white;
+    padding-right: 10px;
+    transition: 0.3s;
+}
+
+#nav-search-button:hover{
+    cursor: pointer;
+    color: rgb(255, 82, 82);
+}
+
+header a{
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    padding-right: 40px;
+    padding-left: 10px;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+header nav ul li:hover > a,
+header nav ul li.active > a{
+    color: rgb(255, 82, 82);
+
+}
+
+#menu-bar{
+    display: none;
+}
+
+header label{
+    color: white;
+    padding: 20px;
+    cursor: pointer;
+    display: none;
+}
+
+header label:hover{
+    color: rgb(255, 82, 82);
+}
+
+section{
+    /* min-height: 100vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    /* font-size: 100px; */
+    /* color: white; */
+    /* font-weight: 700; */
+}
+
+section:nth-child(even){
+    background: #323946;
+}
+
+.homediv{
+    background-image: url(images/concert_background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.homedivtext{
+    position: absolute;
+    bottom: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+.homedivtext strong{
+    font-size: 80px;
+    color: red;
+}
+
+.homedivtext p{
+    font-size: 40px;
+    color: white;
+}
+
+.banddiv{
+    padding-bottom: 100px;
+}
+
+.banddivtext{
+    text-align: center;
+    display: block;
+    margin-top: 100px;
+}
+
+.banddivtext strong{
+    font-size: 60px;
+    font-weight: 200;
+}
+
+.banddivtext h4{
+    font-size: 1.4rem;
+    color: grey;
+    font-weight: 100;
+    font-style: italic;
+    margin: 30px 0 40px 0;
+}
+
+.banddivtext p{
+    font-size: 1.3rem;
+    font-weight: 100;
+    line-height: 2rem;
+    word-spacing: 0.2rem;
+    max-width: 1200px;
+    text-align: justify;
+}
+
+.banddivmembers{
+    display: flex;
+    max-width: 1200px;
+    justify-content: space-evenly;
+    margin-top: 100px;
+}
+
+.membercard{
+    text-align: center;
+    color: black;
+}
+
+.membercard strong{
+    font-size: 2rem;
+}
+
+.memberimage{
+    max-width: 200px;
+    height: 300px;
+    width: 40rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 15px;
+}
+
+#tour{
+    background-color: black;
+}
+
+.tourdiv{
+    max-width: 1000px;
+    width: 100%;
+    background-color: black;
+    text-align: center;
+}
+
+.tourheadingdiv{
+    margin-top: 100px;
+}
+
+.tourdiv strong{
+    color: white;
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: 100;
+    letter-spacing: 10px;
+}
+
+.tourdiv h4{
+    font-size: 1.4rem;
+    color: grey;
+    font-weight: 100;
+    font-style: italic;
+    margin: 50px;
+}
+
+.bookingmonths,
+.septemberbooking,
+.octoberbooking,
+.novemberbooking{
+    background-color: white;
+    height: auto;
+}
+
+.bookingmonths hr,
+.septemberbooking hr,
+.octoberbooking hr,
+.novemberbooking hr{
+    border: none;
+    background-color: gray;
+    height: 1px;
+    opacity: 0.3;
+}
+
+.specificmonth{
+    text-align: start;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.specificmonth strong{
+    color: gray;
+    font-size: 30px;
+    padding: auto;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 30px;
+    text-transform: none;
+    font-size: 30px;
+    font-weight: 100;
+    letter-spacing: normal;
+}
+
+.monthnamestatus{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.soldoutbanner{
+    background-color: rgb(255, 82, 82);
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.numberoftickets{
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.bookingtickets{
+    margin-bottom: 40px;
+    width: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.ticketcard{
+    display: block;
+    width: 300px;
+    text-align: start;
+    background-color: white;
+    color: black;
+    margin-top: 40px;
+}
+
+.ticketdetails{
+    margin: 20px;
+}
+
+.ticketdetails strong{
+    color: black;
+    font-size: 30px;
+    text-transform: none;
+    font-size: 30px;
+    font-weight: 100;
+    letter-spacing: normal;
+}
+
+.ticketdetails h4{
+    margin: 20px 0px;
+    font-size: 30px;
+    font-style: normal;
+}
+
+.merchdetails h4{
+    font-size: 20px;
+    margin: 10px 0px;
+}
+
+.ticketdetails p{
+    font-size: 20px;
+    width: 100%;
+    text-align: justify;
+}
+
+.merchdetails p{
+    font-size: 20px;
+    font-weight: 900;
+    color: red;
+}
+
+.ticketdetails button{
+    margin-top: 10px;
+    font-size: 20px;
+    padding: 10px 15px;
+    background-color: #11141a;
+    color: white;
+    border: none;
+    transition: 0.3s;
+    /* margin-bottom: 20px; */
+}
+
+.ticketdetails a{
+    text-decoration: none;
+    color: white;
+}
+
+.ticketdetails button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: red;
+}
+
+#merchandise{
+    background-color: black;
+}
+
+#contact{
+    background-color: white;
+}
+
+.contactdiv{
+    text-align: center;
+    height: 80vh;
+}
+
+.contactheading{
+margin-top: 200px;
+}
+
+.contactheading strong{
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: 100;
+    letter-spacing: 10px;
+}
+
+.contactdiv h4{
+    font-size: 1.4rem;
+    color: grey;
+    font-weight: 100;
+    font-style: italic;
+    margin: 50px;
+}
+
+.contactdetailsdiv{
+    display: flex;
+}
+
+.contactdetails{
+    font-size: 30px;
+    text-align: start;
+    width: 30rem;
+}
+
+.contactdetails strong{
+    padding-left: 20px;
+    font-size: 25px;
+    text-transform: none;
+}
+
+.usermessage {
+    display: block;
+    height: auto;
+    width: 30rem;
+    text-align: end;
+}
+
+.usermessage input {
+    border: solid 2px rgb(175, 175, 175);
+    height: 50px;
+    font-size: 20px;
+    width: 100%;
+    padding: 10px;
+}
+
+.userdetails{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.userdetails input{
+    margin: 0;
+    width: auto;
+}
+
+.usersendbutton{
+    margin-top: 10px;
+    font-size: 20px;
+    padding: 10px 15px;
+    background-color: #11141a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.usersendbutton:hover{
+    transform: scale(1.1);
+}
+
+.socialmediadiv i{
+    color: rgb(175, 175, 175);
+    transition: 0.3s;
+    margin: 10px;
+}
+
+.socialmediadiv i:hover{
+    color: red;
+}
+
+hr {
+    background: rgb(175, 175, 175);
+    height: 2px;
+    border: none;
+    width: 100%;
+}
+
+footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+}
+
+.externallinks{
+    align-items: center;
+}
+
+footer p{
+    color: rgb(175, 175, 175);
+    font-size: 20px;
+    font-weight: 200;
+    text-align: center;
+}
+
+footer p a{
+    color: rgb(175, 175, 175);
+    transition: 0.3s;
+}
+
+footer p a:hover{
+    color: red;
+}
+
+@media screen and (max-width: 1024px){
+    .banddivtext p{
+        width: 90%;
+        margin: auto;
+    }
+
+    .tourdiv{
+        width: 90%;
+        margin: auto;
+    }
+
+    .contactdiv{
+        width: 90%;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 768px){
+
+    .contactdiv{
+        text-align: center;
+    }
+
+    .contactdetailsdiv{
+        display: block;
+        text-align: center;
+        margin: auto;
+    }
+
+    .contactdetails{
+        width: 100%;
+        text-align: center;
+    }
+
+    .usermessage{
+        width: 100%;
+    }
+
+    .userdetails{
+        justify-content: space-between;
+    }
+
+    .userdetails input{
+        width: 49%;
+    }
+
+    .banddivmembers{
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 699px){
+    header label{
+        display: initial;
+        padding: 20px;
+        color: white;
+    }
+
+    .nav{
+        position: absolute;
+        background: #11141a;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+    }
+
+    .nav ul li{
+        width: 100%;
+    }
+
+    .nav ul li ul{
+        position: relative;
+        width: 100%;
+    }
+
+    #menu-bar:checked ~ .nav{
+        display: initial;
+    }
+
+    
+}
+
+@media screen and (max-width: 499px){
+    .homedivtext strong{
+        font-size: 50px;
+    }
+
+    .homedivtext p{
+        font-size: 20px;
+    }
+
+    .banddivtext strong{
+        font-size: 40px;
+    }
+
+    .banddivtext{
+        margin-top: 70px;
+    }
+
+    .banddivtext h4{
+        font-size: 1.2rem;
+    }
+
+    .banddivtext p{
+        font-size: 1.1rem;
+        word-spacing: normal;
+        line-height: 1.8rem;
+    }
+
+    .banddivmembers{
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .memberimage{
+        margin: 0 auto;
+        margin-bottom: 40px;
+    }
+
+    .banddiv{
+        padding-bottom: 30px;
+    }
+
+    .tourheadingdiv{
+        margin-top: 50px;
+    }
+
+    .tourheadingdiv strong{
+        font-size: 30px;
+    }
+
+    .tourdiv h4{
+        font-size: 1.1rem;
+        margin: 30px;
+    }
+
+    .monthnamestatus strong{
+        font-size: 20px;
+    }
+
+    .soldoutbanner{
+        font-size:15px;
+        padding: 5px;
+    }
+
+    .ticketdetails strong{
+        font-size: 25px;
+    }
+
+    .ticketdetails h4{
+        margin: 15px 0;
+    }
+
+    .ticketdetails p{
+        font-size: 15px;
+    }
+
+    .ticketdetails button{
+        width: 100%;
+    }
+
+    .contactheading{
+        margin-top: 50px;
+    }
+
+    .contactheading strong{
+        font-size: 30px;
+    }
+
+    .contactdiv h4{
+        margin: 30px;
+        font-size: 1.1rem;
+    }
+
+    .contactdetails{
+        font-size: 25px;
+    }
+
+    .contactdetails strong{
+        font-size: 20px;
+    }
+
+    .contactemail,
+    .contactphone,
+    .contactlocation{
+        align-items: center;
+        justify-content: center;
+    }
+
+    .contactdiv{
+        height: auto;
+    }
+
+    .contactdetailsdiv{
+        margin-bottom: 50px;
+    }
+
+    .usermessage{
+        text-align: center;
+    }
+
+    .userdetails{
+        display: block;
+        height: auto;
+    }
+
+    .userdetails input{
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .contactdetails{
+        margin-bottom: 50px;
+    }
+}
